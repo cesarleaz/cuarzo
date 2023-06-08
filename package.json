@@ -1,0 +1,47 @@
+{
+  "name": "@cuarzo/cuarzo-monorepo",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "homepage": "https://github.com/gabriedev/cuarzo/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabriedev/cuarzo.git"
+  },
+  "workspaces": [
+    "examples/*",
+    "packages/*"
+  ],
+  "keywords": [
+    "engine",
+    "games",
+    "2D",
+    "streaming",
+    "performance",
+    "multiplatform",
+    "graphics",
+    "sound",
+    "development",
+    "web",
+    "mobile",
+    "streamers",
+    "audio",
+    "animations",
+    "effects",
+    "customization",
+    "game engine",
+    "game development",
+    "game streaming"
+  ],
+  "scripts": {
+    "co": "sui-mono commit"
+  },
+  "dependencies": {
+    "@s-ui/mono": "2"
+  },
+  "devDependencies": {
+    "vite": "4"
+  }
+}
