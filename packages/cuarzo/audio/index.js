@@ -1,3 +1,5 @@
+import { Resources } from '../internals/resources'
+
 /**
  * Class representing an AudioClip for managing and playing audio clips.
  */
@@ -12,19 +14,19 @@ export class AudioClip {
      * @private
      * @type {Object.<number, boolean>}
      */
-    this.$playing = {}
+    this._playing = {}
 
     /**
      * Audio clips.
      * @private
      * @type {Array.<{audio: Audio, index: number}>}
      */
-    this.$sounds = resources.map((src, index) => {
+    this._audios = resources.map((src, index) => {
       /**
        * Audio object.
        * @type {Audio}
        */
-      const audio = new Audio(src)
+      const audio = Resources.loadAudio(src)
 
       audio.addEventListener('ended', () => this.stop(index))
 
@@ -40,10 +42,10 @@ export class AudioClip {
      * Index of the audio clip to play.
      * @type {number}
      */
-    const soundIndex = Math.floor(Math.random() * this.$sounds.length)
-    const { audio, index } = this.$sounds[soundIndex]
+    const soundIndex = Math.floor(Math.random() * this._audios.length)
+    const { audio, index } = this._audios[soundIndex]
 
-    this.$playing[index] = true
+    this._playing[index] = true
     audio.play()
   }
 
@@ -52,17 +54,17 @@ export class AudioClip {
    * @param {number} index - Index of the audio clip to stop.
    */
   stop(index) {
-    const audio = this.$sounds[index].audio
+    const audio = this._audios[index].audio
     audio.pause()
     audio.currentTime = 0
-    delete this.$playing[index]
+    delete this._playing[index]
   }
 
   /**
    * Pause all currently playing audio clips.
    */
   pause() {
-    for (const index in this.$playing) {
+    for (const index in this._playing) {
       this.stop(index)
     }
   }

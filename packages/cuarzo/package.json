@@ -1,0 +1,36 @@
+{
+  "name": "cuarzo",
+  "version": "1.0.0-beta",
+  "type": "module",
+  "license": "MIT",
+  "author": "Cesar Leañez",
+  "description": "Native-ESM The Game Engine 2D 😜",
+  "main": "index.js",
+  "scripts": {
+    "phoenix": "rm -rf node_modules package-lock.json && npm i --no-audit --no-fund --no-package-lock",
+    "build": "vite build"
+  },
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabriedev/cuarzo.git",
+    "directory": "packages/cuarzo"
+  },
+  "keywords": [
+    "engine",
+    "2D",
+    "streaming",
+    "performance",
+    "cross-platform",
+    "graphics"
+  ],
+  "bugs": {
+    "url": "https://github.com/gabriedev/cuarzo/issues"
+  },
+  "homepage": "https://github.com/gabriedev/cuarzo/tree/main/#readme",
+  "devDependencies": {
+    "vite": "4"
+  }
+}
