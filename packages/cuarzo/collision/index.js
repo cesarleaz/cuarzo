@@ -87,9 +87,9 @@ export class Collision extends Node2D {
    */
   _update() {
     // Get all components with collisions
-    const componentsWithCollisions = Cuarzo.getCollisionsComponents()
+    const collisions = Cuarzo.getCollisions()
 
-    for (const collider of componentsWithCollisions) {
+    for (const collider of collisions) {
       // Check if the collider is the same or is inactive
       if (
         collider.name === this.name ||
@@ -185,8 +185,7 @@ export function CollisionShare(node, ...properties) {
       })
 
       node.addComponent(collision)
+      Cuarzo.collisions.push(collision)
     }
   )
-
-  Cuarzo.collisions.push(node)
 }

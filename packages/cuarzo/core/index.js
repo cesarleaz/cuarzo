@@ -7,10 +7,22 @@ import { Resources } from '../internals/resources'
 import { camera } from './camera'
 
 /**
- *  @typedef {import('../node').Node2D} Node2D
+ * @typedef {import('../node').Node2D} Node2D
+ * @typedef {Object} CuarzoOptions
+ * @property {HTMLCanvasElement} canvas - The HTML canvas element to be used.
+ * @property {number} width - The width of the canvas.
+ * @property {number} height - The height of the canvas.
+ * @property {string} imageBrandUrl - The URL of the branding image.
+ * @property {HTMLVideoElement} videoElement - The HTML video element for branding.
  */
 
+/**
+ * The main engine class.
+ */
 class Engine {
+  /**
+   * Creates an instance of the Engine class.
+   */
   constructor() {
     this.lastTime
     /** @type {Node2D[]} */
@@ -23,6 +35,10 @@ class Engine {
     }
   }
 
+  /**
+   * Register a listener for resource loading completion.
+   * @param {function} listener - The listener function to be executed when resources are loaded.
+   */
   onLoaded(listener) {
     if (typeof listener !== 'function')
       throw new Error('Invalid listener. Expected a function.')
@@ -30,11 +46,19 @@ class Engine {
     Resources.executeListener()
   }
 
+  /**
+   * Mounts nodes to the engine and starts the game loop.
+   * @param {Node2D[]} nodes - The nodes to be mounted.
+   */
   mount(nodes) {
     this.nodes = this.nodes.concat(nodes)
     window.requestAnimationFrame(this._start.bind(this))
   }
 
+  /**
+   * Initializes the engine and sets up the canvas.
+   * @param {CuarzoOptions} options - The initialization options.
+   */
   init({
     canvas = document.querySelector('canvas'),
     width = 600,
@@ -55,6 +79,9 @@ class Engine {
 
     document.body.style.background = 'black'
 
+    /**
+     * Shows the engine logo.
+     */
     function showLogoEngine() {
       renderLogoImage(logoEngine, Resources.executeListener.bind(this))
       document.body.style.removeProperty('background')
@@ -74,14 +101,17 @@ class Engine {
     showLogoEngine()
   }
 
+  /**
+   * Clears the canvas.
+   */
   clear() {
     if (this.ctx === undefined) return
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
   /**
-   *
-   * @param {number} time
+   * The game loop function.
+   * @param {number} time - The current time.
    * @private
    */
   _gameLoop(time) {
@@ -97,8 +127,8 @@ class Engine {
   }
 
   /**
-   *
-   * @param {number} delta
+   * Starts the game loop.
+   * @param {number} delta - The time delta.
    * @private
    */
   _start(delta) {
@@ -111,14 +141,15 @@ class Engine {
   }
 
   /**
-   *
-   * @returns {Collision[]}
+   * Retrieves the collision components from nodes.
+   * @returns {Collision[]} - The collision components.
    */
-  getCollisionsComponents() {
-    return this.collisions.map((node) =>
-      node.components.filter((component) => component instanceof Collision)
-    )
+  getCollisions() {
+    return this.collisions
   }
 }
 
+/**
+ * The main engine instance.
+ */
 export const Cuarzo = new Engine()
