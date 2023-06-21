@@ -9,18 +9,18 @@ import { detectSegmentCollision } from '../internals/collisions/segmentCollision
 
 /**
  * @typedef {Object} Properties
- * @property {string} [Properties.shapeType='rect']
- * @property {Vector2} [Properties.position]
- * @property {Vector2} [Properties.size]
- * @property {number} [Properties.center]
- * @property {number} [Properties.radius]
- * @property {Vector2[]} [Properties.vertices]
- * @property {Vector2} [Prstartoperties.start]
- * @property {Vector2} [Properties.end]
- * @property {string} [Properties.colorDeteccion]
- *
+ * @property {string} [Properties.shapeType='rect'] - The shape type for collision detection.
+ * @property {Vector2} [Properties.position] - The position of the collision shape.
+ * @property {Vector2} [Properties.size] - The size of the collision shape.
+ * @property {number} [Properties.center] - The center of the circular collision shape.
+ * @property {number} [Properties.radius] - The radius of the circular collision shape.
+ * @property {Vector2[]} [Properties.vertices] - The vertices of the polygonal collision shape.
+ * @property {Vector2} [Prstartoperties.start] - The starting point of the segment collision shape.
+ * @property {Vector2} [Properties.end] - The ending point of the segment collision shape.
+ * @property {string} [Properties.colorDeteccion] - The color used for collision detection visualization.
  */
 
+// Dictionary of compatible collision shapes with their corresponding detection functions
 const compatibleShapes = {
   rect: detectRectangleCollision,
   cir: detectCircleCollision,
@@ -30,9 +30,9 @@ const compatibleShapes = {
 
 export class Collision extends Node2D {
   /**
-   *
-   * @param {string} name
-   * @param {Properties} param2
+   * Creates an instance of Collision.
+   * @param {string} name - The name of the collision.
+   * @param {Properties} [param2] - The collision properties.
    */
   constructor(
     name,
@@ -52,42 +52,53 @@ export class Collision extends Node2D {
     this.shapeType = shapeType
     this.colorDeteccion = colorDeteccion
     /**
-     * @type {boolean} - state last of collision
+     * @type {boolean} - The state of the last collision.
      */
     this._isCollision = false
 
     if (shapeType === 'rect') {
       this.position = position
       this.size = size
+      return
     }
     if (shapeType === 'cir') {
       this.center = center
       this.radius = radius
       this.position = position
+      return
     }
     if (shapeType === 'poly') {
       this.vertices = vertices
       this.position = position
       this.size = size
+      return
     }
     if (shapeType === 'seg') {
       this.start = start
       this.end = end
+      return
     }
 
-    throw new Error()
+    throw new Error('Invalid shapeType provided.')
   }
 
+  /**
+   * Updates the collision state.
+   */
   _update() {
+    // Get all components with collisions
     const componentsWithCollisions = Cuarzo.getCollisionsComponents()
 
     for (const collider of componentsWithCollisions) {
+      // Check if the collider is the same or is inactive
       if (
         collider.name === this.name ||
         !collider._active ||
         !collider.parent?._active
       )
         continue
+
+      // Check collision with the current collider
       this.checkCollision(collider)
     }
 
@@ -97,8 +108,8 @@ export class Collision extends Node2D {
   }
 
   /**
-   *
-   * @param {Collision} otherCollider
+   * Checks collision with another collider.
+   * @param {Collision} otherCollider - The other collider to check collision with.
    */
   checkCollision(otherCollider) {
     /**
@@ -127,31 +138,43 @@ export class Collision extends Node2D {
     }
   }
 
+  /**
+   * Draws the collision detection visualization.
+   */
   detectionDraw() {
     // Cuarzo.ctx.fillStyle = ref.bg
     // Cuarzo.ctx.fillRect(ref.x, ref.y, ref.w, ref.h)
   }
 }
 
-function genetateNumber(n) {
+/**
+ * Generates a random number.
+ * @param {number} n - The upper limit for the random number.
+ * @returns {string} - The generated random number.
+ */
+function generateNumber(n) {
   return (Math.random() * n).toFixed(0)
 }
 
-function randomColorDeteccion() {
-  const r = genetateNumber(255)
-  const g = genetateNumber(255)
-  const b = genetateNumber(255)
+/**
+ * Generates a random color for collision detection visualization.
+ * @returns {string} - The generated random color.
+ */
+function randomColorDetection() {
+  const r = generateNumber(255)
+  const g = generateNumber(255)
+  const b = generateNumber(255)
 
   return `rgb(${r}, ${g}, ${b}, .65)`
 }
 
 /**
- *
- * @param {Node2D} node
- * @param  {...Properties} properties
+ * Shares collision properties with a node and creates the corresponding collision components.
+ * @param {Node2D} node - The node to share collision properties with.
+ * @param  {...Properties} properties - The collision properties.
  */
 export function CollisionShare(node, ...properties) {
-  const randomColor = randomColorDeteccion()
+  const randomColor = randomColorDetection()
 
   properties.forEach(
     ({ shapeType, colorDeteccion = randomColor, ...shapeProperties }) => {
