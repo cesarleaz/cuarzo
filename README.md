@@ -6,49 +6,50 @@
 
 </div>
 
-> 🚀 🙉 Introducing Cuarzo Engine, a JavaScript 2D engine with Game Streaming support that enables you to create incredible games quickly and easily. 🕹️💻
+> 🚀 🙉 Introducing Cuarzo Engine, a JavaScript 2D engine with Game Streaming support that allows you to create incredible games quickly and easily. 🕹️💻
 
 ### Key Features
 
-- 🚀 **Optimized Performance:** Enjoy smooth and uninterrupted gaming experiences with our cutting-edge performance optimization, specifically tailored for Game Streaming environments.
+- 🚀 **Optimized Performance:** Enjoy smooth and uninterrupted gameplay thanks to our cutting-edge performance optimization, specially tailored for Game Streaming environments.
 
-- 🌐 **Multiplatform:** Create games for web browsers and mobile devices, ensuring a wide reach for your audience, including users of Game Streaming platforms.
+- 🌐 **Cross-Platform:** Create games for web browsers and mobile devices, ensuring a wide reach for your audience, including users from Game Streaming platforms.
 
-- 🛠️ **Intuitive Tools:** Our friendly set of tools makes game development and creation efficient, providing a seamless experience for both developers and streamers.
+- 🛠️ **Intuitive Tools:** Our friendly toolkit makes game development and creation efficient, providing a smooth experience for both developers and streamers.
 
-- 🎨 **Stunning Graphics:** Bring your games to life with high-quality graphics, visual effects, and smooth animations, ensuring visually appealing experiences even during streaming.
+- 🎨 **Stunning Graphics:** Bring your games to life with high-quality graphics, visual effects, and smooth animations, ensuring a visually appealing experience even during streaming.
 
 - 🧩 **Flexibility and Customization:** Adapt the engine to your specific needs with its modular architecture and customization capabilities, allowing you to create unique and exciting games for streaming.
 
+- ⚡️ **Reactive Programming:** Cuarzo Engine offers support for reactive programming, allowing you to create interactive and dynamic games by automatically managing and reacting to events and changes in game data. Harness the power of reactive programming to create exciting gameplay mechanics and smooth player experiences.
+
 ### Documentation
 
-Refer to our comprehensive [documentation](https://github.com/gabriedev/cuarzo-docs) for detailed instructions, examples, and usage guides specifically designed for Game Streaming compatibility. Take advantage of the available resources to create attractive and streaming-ready games.
+Check out our comprehensive [documentation](https://github.com/gabriedev/cuarzo-docs) for detailed instructions, examples, and guides specifically designed for Game Streaming compatibility. Take advantage of the available resources to create engaging and streaming-ready games.
 
 ### Example
 
-Discover the power of Cuarzo Engine with our simple example to start creating games quickly and easily! We have several example projects available in the [Cuarzo Engine repository.](https://github.com/gabriedev/cuarzo) Here's a simple starting example:
+Discover the power of Cuarzo Engine with our simple example to start creating games quickly and easily! We have several example projects in the [Cuarzo Engine repository](https://github.com/gabriedev/cuarzo). Here's the first simple example to get started:
 
 ```js
 import { Cuarzo } from 'cuarzo/core'
-import { Area2D } from 'cuarzo/node/area2D'
+import { Node2D } from 'cuarzo/node'
 import { Sprite } from 'cuarzo/sprite'
 
+const character = new Node2D('character') // Create the Node2D for the game character
+Sprite(character, 'sprite_name', 'path_to_character_image.png') // Create the character Sprite
+
 Cuarzo.init()
-
-const character = new Area2D('character') // Create the area for the game character
-Sprite('sprite_name', character, 'ruta_a_la_imagen_del_personaje.png') // Create the character's sprite
-
 Cuarzo.onLoaded(() => {
   // Mount the objects in the game area
   Cuarzo.mount([character])
 })
 ```
 
-In this example, the Cuarzo Engine provides you with a minimalist structure to bring your games to life. With just a few lines of code, you can create a relative area that contains a character. Using the **Area2D** module, you can define a container with the properties your character needs to be represented in the game. Then, with the **Sprite** module, you can assign an image to the character to give it a visual appearance.
+In this example, Cuarzo Engine provides you with a minimalist structure to bring your games to life. With just a few lines of code, you can create a Node2D that holds a character. By using the Node2D module, you can define a container with the properties your character needs to represent in the game. Then, with the Sprite module, you can assign an image to the character to give it a visual appearance.
 
-The Cuarzo Engine is initialized by calling **Cuarzo.init()**, and once all the internal resources are loaded using **Cuarzo.onLoaded()**, you can mount the character in the game area using **Cuarzo.mount([character])**.
+The Cuarzo Engine is initialized by calling Cuarzo.init(), and once all the internal resources are loaded using Cuarzo.onLoaded(), you can mount the character to the game area using Cuarzo.mount([character]).
 
-This example is just the beginning of what you can achieve with the Cuarzo Engine. Use it as a starting point to create your own 2D games easily and efficiently. We encourage you to explore more in our Cuarzo Engine repository and join our community, where you can receive support, share your creations, and collaborate with other developers.
+This example is just the beginning of what you can achieve with Cuarzo Engine. Use it as a starting point to create your own 2D games easily and efficiently. We encourage you to explore more in our Cuarzo Engine repository and join our community, where you can receive support, share your creations, and collaborate with other developers.
 
 ### Contribution
 
