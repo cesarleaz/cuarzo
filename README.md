@@ -26,13 +26,43 @@
 
 Check out our comprehensive [documentation](https://github.com/gabriedev/cuarzo-docs) for detailed instructions, examples, and guides specifically designed for Game Streaming compatibility. Take advantage of the available resources to create engaging and streaming-ready games.
 
+### Installation
+
+To start using Cuarzo Engine, follow these steps for installation:
+
+Install Cuarzo Engine via npm by running the following command:
+
+```bash
+npm install cuarzo
+```
+
+Once the installation is complete, you can import Cuarzo into your JavaScript project:
+
+```js
+import { Cuarzo } from 'cuarzo/core'
+import { Node2D } from 'cuarzo/node'
+import { Sprite } from 'cuarzo/sprite'
+
+// Your game code here
+```
+
+You are now ready to use Cuarzo Engine in your project.
+
+#### Getting Started
+
+To begin creating games with Cuarzo Engine, visit our [Getting Started](https://github.com/gabriedev/cuarzo-docs) page in the Cuarzo Engine documentation repository. On this page, you will find detailed information on how to set up your development environment and create your first game using the engine.
+
+Follow the provided steps on the "Getting Started" page to start developing your own games with Cuarzo Engine.
+
+Congratulations again on the npm publication of Cuarzo Engine! This updated installation section will help users get started quickly with the npm package.
+
 ### Example
 
 Discover the power of Cuarzo Engine with our simple example to start creating games quickly and easily! We have several example projects in the [Cuarzo Engine repository](https://github.com/gabriedev/cuarzo). Here's the first simple example to get started:
 
 ```js
 import { Cuarzo } from 'cuarzo/core'
-import { Node2D } from 'cuarzo/node'
+import { Node2D } from 'cuarzo/node/node2D'
 import { Sprite } from 'cuarzo/sprite'
 
 const character = new Node2D('character') // Create the Node2D for the game character
